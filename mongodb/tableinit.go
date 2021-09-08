@@ -5,21 +5,16 @@ import (
 )
 
 var (
-	collectionSwap        *mgo.Collection
-	collectionSwapPending *mgo.Collection
-	collectionSwapDeleted *mgo.Collection
+	c_admin_role_assoc_popedoms *mgo.Collection
 )
 
 // do this when reconnect to the database
 func deinintCollections() {
-	collectionSwap = database.C(tbSwap)
-	collectionSwapPending = database.C(tbSwapPending)
+	c_admin_role_assoc_popedoms = database.C(tb_admin_role_assoc_popedoms)
 }
 
 func initCollections() {
-	initCollection(tbSwap, &collectionSwap, "txid")
-	initCollection(tbSwapPending, &collectionSwapPending, "txid")
-	initCollection(tbSwapDeleted, &collectionSwapDeleted, "txid")
+	initCollection(tb_admin_role_assoc_popedoms, &c_admin_role_assoc_popedoms, "")
 }
 
 func initCollection(table string, collection **mgo.Collection, indexKey ...string) {

@@ -5,17 +5,12 @@ import (
 )
 
 const (
-	tbSwap        string = "swap"
-	tbSwapPending string = "pending"
-	tbSwapDeleted string = "deleted"
+	tb_admin_role_assoc_popedoms string = "admin_role_assoc_popedoms"
 )
 
-type MgoSwap struct {
-	Id         string `bson:"_id"` //txid
-	Txid       string `bson:"txid"`
-	PairID     string `bson:"pairID"`    //"FXSv4"
-	RpcMethod  string `bson:"rpcMethod"` //"swap.Swapin"
-	SwapServer string `bson:"swapServer"`
-	Chain      string `bson:"chain"`
-	Timestamp  uint64 `bson:"timestamp"`
+//admin_role_assoc_popedoms, [id roleId popedomCode
+type Struct_admin_role_assoc_popedoms struct {
+	Id          string `bson:"_id"`
+	RoleId      string `bson:"roleId"`
+	PopedomCode string `bson:"popedomCode"`
 }

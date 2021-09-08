@@ -1,4 +1,4 @@
-package main
+package scanner
 
 // 从Mysql中导出数据到CSV文件。
 
@@ -40,7 +40,7 @@ func init() {
 	outputDir = fmt.Sprintf("%v/", *output)
 }
 
-func main() {
+func test() {
 
 	count := len(tables)
 	ch := make(chan bool, count)

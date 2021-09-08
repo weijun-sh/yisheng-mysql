@@ -1,27 +1,13 @@
 package scanner
 
 import (
-	"bytes"
-	"context"
-	"errors"
-	"fmt"
-	"math/big"
-	"strings"
-	"sync"
 	"time"
 
 	"github.com/anyswap/CrossChain-Bridge/cmd/utils"
 	"github.com/anyswap/CrossChain-Bridge/log"
-	"github.com/anyswap/CrossChain-Bridge/rpc/client"
-	"github.com/anyswap/CrossChain-Bridge/tokens"
 	"github.com/urfave/cli/v2"
 
-	ethclient "github.com/jowenshaw/gethclient"
-	"github.com/jowenshaw/gethclient/common"
-	"github.com/jowenshaw/gethclient/types"
-
 	"github.com/weijun-sh/gethscan/params"
-	"github.com/weijun-sh/gethscan/tools"
 	"github.com/weijun-sh/gethscan/mongodb"
 )
 
@@ -72,7 +58,6 @@ func addMongodbSwapPendingPost(swap *swapPost) {
                PairID:     swap.pairID,
                RpcMethod:  swap.rpcMethod,
                SwapServer: swap.swapServer,
-               Chain:      chain,
                Timestamp:  uint64(time.Now().Unix()),
        }
        mongodb.AddSwapPending(ms, false)

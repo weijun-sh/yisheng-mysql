@@ -20,7 +20,7 @@ func MongoServerInit(addrs []string, dbname, user, pass string) {
 	log.Info("MongoServerInit", "dbname", dbname)
 	initDialInfo(addrs, dbname, user, pass)
 	mongoConnect()
-	initCollections()
+	//initCollections()
 	go checkMongoSession()
 }
 
@@ -50,7 +50,7 @@ func mongoConnect() {
 	session.SetMode(mgo.Monotonic, true)
 	session.SetSafe(&mgo.Safe{FSync: true})
 	database = session.DB(dialInfo.Database)
-	deinintCollections()
+	//deinintCollections()
 	log.Info("[mongodb] connect database finished.", "dbName", dialInfo.Database)
 }
 
@@ -89,7 +89,7 @@ func ensureMongoConnected() (err error) {
 		log.Info("[mongodb] refresh session.", "dbName", dialInfo.Database)
 		session.Refresh()
 		database = session.DB(dialInfo.Database)
-		deinintCollections()
+		//deinintCollections()
 		err = sessionPing()
 	}
 	return err

@@ -1,26 +1,29 @@
 package scanner
 
 import (
-	"time"
+	//"time"
 
-	"github.com/anyswap/CrossChain-Bridge/cmd/utils"
-	"github.com/anyswap/CrossChain-Bridge/log"
+	"github.com/weijun-sh/yisheng-mysql/cmd/utils"
+	"github.com/weijun-sh/yisheng-mysql/log"
 	"github.com/urfave/cli/v2"
 
-	"github.com/weijun-sh/gethscan/params"
-	"github.com/weijun-sh/gethscan/mongodb"
+	"github.com/weijun-sh/yisheng-mysql/params"
+	"github.com/weijun-sh/yisheng-mysql/mongodb"
 )
 
 var (
 	// ScanSwapCommand scan swaps on eth like blockchain
 	ScanSwapCommand = &cli.Command{
 		Action:    scanSwap,
-		Name:      "scanswap",
+		Name:      "mysql",
 		Usage:     "scan cross chain swaps",
 		ArgsUsage: " ",
 		Description: `
 scan cross chain swaps
 `,
+		Flags: []cli.Flag{
+                        utils.ConfigFileFlag,
+                },
 	}
 )
 
@@ -29,39 +32,17 @@ func scanSwap(ctx *cli.Context) error {
 	params.LoadConfig(utils.GetConfigFilePath(ctx))
 
        //mongo
-       dbConfig := params.GetMongodbConfig()
-       chain = dbConfig.BlockChain
+       params.GetMongodbConfig()
        InitMongodb()
 
-	scanner.initClient()
-	scanner.run()
+	run()
 	return nil
 }
 
-func addMongodbSwapPost(swap *swapPost) {
-       ms := &mongodb.MgoSwap{
-               Id:         swap.txid,
-               Txid:       swap.txid,
-               PairID:     swap.pairID,
-               RpcMethod:  swap.rpcMethod,
-               SwapServer: swap.swapServer,
-               Chain:      chain,
-               Timestamp:  uint64(time.Now().Unix()),
-       }
-       mongodb.AddSwap(ms, false)
+func add_admin_role_assoc_popedoms(arap *mongodb.Struct_admin_role_assoc_popedoms) {
+	//arap.Timestamp = uint64(time.Now().Unix())
+       //mongodb.Add_admin_role_assoc_popedoms(arap, false)
 }
-
-func addMongodbSwapPendingPost(swap *swapPost) {
-       ms := &mongodb.MgoSwap{
-               Id:         swap.txid,
-               Txid:       swap.txid,
-               PairID:     swap.pairID,
-               RpcMethod:  swap.rpcMethod,
-               SwapServer: swap.swapServer,
-               Timestamp:  uint64(time.Now().Unix()),
-       }
-       mongodb.AddSwapPending(ms, false)
- }
 
 // InitMongodb init mongodb by config
 func InitMongodb() {

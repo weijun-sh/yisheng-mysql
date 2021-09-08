@@ -14,6 +14,7 @@ require (
 	github.com/stretchr/testify v1.7.0
 	github.com/urfave/cli/v2 v2.3.0
 	github.com/weijun-sh/gethscan v0.0.0-20210826102150-0667d7f0b34b
+	go.mongodb.org/mongo-driver v1.7.2 // indirect
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )

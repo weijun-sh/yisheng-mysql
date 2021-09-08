@@ -10,7 +10,7 @@ const (
 
 //admin_role_assoc_popedoms, [id roleId popedomCode
 type Struct_admin_role_assoc_popedoms struct {
-	Id          string `bson:"_id"`
+	Id          string `bson:"id"`
 	RoleId      string `bson:"roleId"`
 	PopedomCode string `bson:"popedomCode"`
 }

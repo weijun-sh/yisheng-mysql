@@ -2,9 +2,6 @@ package params
 
 import (
 	"encoding/json"
-	"errors"
-	"fmt"
-	"strings"
 
 	"github.com/BurntSushi/toml"
 	"github.com/weijun-sh/yisheng-mysql/common"
@@ -14,8 +11,8 @@ import (
 var (
 	configFile string
 	scanConfig = &Config{}
-	mongodbConfig = &MongoDBConfig{}
-	mysqldbConfig = &MysqlDBConfig{}
+	mongodbConfig = &DBConfig{}
+	mysqldbConfig = &DBConfig{}
 )
 
 type Config struct {
@@ -42,7 +39,7 @@ func GetMysqldbConfig() *DBConfig {
 }
 
 // GetScanConfig get scan config
-func GetScanConfig() *ScanConfig {
+func GetScanConfig() *Config {
 	return scanConfig
 }
 
@@ -67,11 +64,7 @@ func LoadConfig(filePath string) *Config {
 	log.Println("LoadConfig finished.", string(bs))
 
        mongodbConfig = config.MongoDB
-       mysqlConfig = config.MysqlDB
-
-       if err := scanConfig.CheckConfig(); err != nil {
-		log.Fatalf("LoadConfig Check config failed. %v", err)
-	}
+       mysqldbConfig = config.MysqlDB
 
 	configFile = filePath // init config file path
 	return scanConfig

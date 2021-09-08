@@ -1,4 +1,4 @@
-module mysql
+module yisheng-mysql
 
 go 1.16
 

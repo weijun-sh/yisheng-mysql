@@ -1,3 +1,3 @@
 # yisheng-mysql
-## run
-./main --config params/config-example.toml
+# run
+`./main mysql --config params/config-example.toml`

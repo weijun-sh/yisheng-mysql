@@ -5,15 +5,16 @@ import (
 )
 
 var (
-	//c_admin_role_assoc_popedoms *mgo.Collection
 	collection map[string]*mgo.Collection = make(map[string]*mgo.Collection)
 )
 
 // do this when reconnect to the database
-func deinintCollections(table string) {
-	//c_admin_role_assoc_popedoms = database.C(tb_admin_role_assoc_popedoms)
-	collection[table] = database.C(table)
-	initCollections(table, collection[table])
+func deinintCollections(table string) *mgo.Collection {
+	if collection[table] == nil {
+		collection[table] = database.C(table)
+		initCollections(table, collection[table])
+	}
+	return collection[table]
 }
 
 func initCollections(table string, ct *mgo.Collection) {

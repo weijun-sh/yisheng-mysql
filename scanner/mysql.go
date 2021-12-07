@@ -24,6 +24,7 @@ const (
 
 func init() {
 	tabs := flag.String("tables", "admin_role_assoc_popedoms,admin_roles,admin_settings,admin_user_assoc_roles,admin_users,after_sale_orders,article_categories,articles,departments,device_categories,devices,doctors,dysms_settings,dysms_templates,ecode_send_logs,email_templates,ezviz_settings,feedbacks,hc_card_orders,hc_cards,hc_services,hospitals,jj_persons,mcode_send_logs,member_groups,member_hc_cards,members,qcloudsms_settings,qcloudsms_templates,qiniu_settings,qqmap_settings,reports,slider_contents,smtp_settings,sp_wenzhen_logs,station_admin,station_jk_devices,station_zn_locks,stations,suppliers,sysconfig,tycard_lq_logs,wxapp_fans,wxapp_subscribe_templates,wxapp_versions,wxapp_visit_logs,wxapps,yizhu_histories,zhuanzhen_logs", "the tables will export data, multi tables separator by comma, default:...")
+	//tabs := flag.String("tables", "hc_card_orders,jj_persons", "the tables will export data, multi tables separator by comma, default:...")
 	flag.Parse()
 
 	tables = append(tables, strings.Split(*tabs, ",")...)
@@ -99,7 +100,11 @@ func querySQL(db *sql.DB, table string, ch chan bool) {
 			if columns[i] == "id" {
 				columns[i] = "_id"
 			}
+			//vstring := strings.Replace(string(v),"\\","", -1)
+			//vstring = strings.Replace(vstring,"\"{","{", -1)
+			//vstring = strings.Replace(vstring,"}\n\"","}", -1)
 			ms[columns[i]] = string(v)
+			fmt.Printf("v: %v\n", string(v))
 		}
 		//spew.Printf("values: %#v\n", values)
 		fmt.Printf("values: %v\n", ms)

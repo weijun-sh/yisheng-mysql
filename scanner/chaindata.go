@@ -90,7 +90,7 @@ func build_reports() {
 			hcCardOrder.Realname = md5sum(jj.Realname)
 		}
 
-		hcCardOrder.YzContents = card.YzContents
+		hcCardOrder.YzContents = md5sum(card.YzContents)
 
 		names := getCardType(card.Hxcode)
 		hcCardOrder.CardType = names
